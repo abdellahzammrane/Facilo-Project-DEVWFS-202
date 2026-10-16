@@ -345,6 +345,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Eight distinct products are available in each category. Featured rows
   // provide a compact first view; the full 40-item catalog stays one click away.
+  // Optional final column: comma-separated image URLs or assets paths, e.g.
+  // featured|assets/headphones-side.jpg,assets/headphones-back.jpg.
   const catalogRows = `
 E|Studio wireless headphones|1890|4.9|128|Bestseller|Soundroom|1505740420928-5e560c06d30e|Amber over-ear wireless headphones|Studio-tuned sound and soft memory foam make these a comfortable daily listening companion.|featured
 E|Pocket mirrorless camera|6490|4.8|76|Editor's pick|Frame & Field|1516035069371-29a1b244cc32|Compact mirrorless camera on a neutral surface|A compact camera made for everyday documentation, weekend travel and the occasional happy accident.|featured
@@ -387,7 +389,14 @@ A|All-weather floor mat set|690|4.7|62|Everyday protection|Drive Goods|150422249
 A|Roof cargo travel bag|1290|4.8|73|Weekend favorite|Route One|1533473359331-0135ef1b58bf|Car packed for a scenic road trip|A weather-resistant cargo bag that adds flexible storage for longer drives and weekend escapes.|-
 A|Cordless car care vacuum|980|4.7|88|Workshop pick|Cleanline Auto|1493238792000-8113da705763|Polished car ready for a detailed clean|A compact cordless vacuum with useful attachments for keeping seats, mats and hard-to-reach corners tidy.|-
   `.trim().split("\n").map((row, index) => {
-    const [code, name, price, rating, reviews, badge, seller, imageId, alt, description, featured] = row.trim().split("|");
+    const [code, name, price, rating, reviews, badge, seller, imageId, alt, description, featured, galleryIds = ""] = row.trim().split("|");
+    const photoIds = [imageId, ...galleryIds.split(",").map((photoId) => photoId.trim()).filter(Boolean)];
+    const images = photoIds.map((photoId, imageIndex) => ({
+      src: /^https?:\/\//i.test(photoId) || photoId.startsWith("assets/")
+        ? photoId
+        : `https://images.unsplash.com/photo-${photoId}?auto=format&fit=crop&w=1100&h=850&q=88`,
+      alt: imageIndex === 0 ? alt : `${name}, alternate view ${imageIndex + 1}`
+    }));
     return {
       id: `facilo-${index + 1}`,
       category: categoryNames[code],
@@ -397,7 +406,8 @@ A|Cordless car care vacuum|980|4.7|88|Workshop pick|Cleanline Auto|1493238792000
       reviews: Number(reviews),
       badge,
       seller,
-      image: `https://images.unsplash.com/photo-${imageId}?auto=format&fit=crop&w=900&h=760&q=85`,
+      image: images[0].src,
+      images,
       alt,
       description,
       featured: featured === "featured"
@@ -415,8 +425,15 @@ A|Cordless car care vacuum|980|4.7|88|Workshop pick|Cleanline Auto|1493238792000
   const filterTabs = [...document.querySelectorAll(".filter-tab")];
   const modalElement = document.querySelector("#productModal");
   const modal = window.bootstrap && modalElement ? new bootstrap.Modal(modalElement) : null;
+  const modalImage = document.querySelector("#productModalImage");
+  const galleryCounter = document.querySelector("#productGalleryCounter");
+  const galleryThumbnails = document.querySelector("#productGalleryThumbnails");
+  const previousPhotoButton = document.querySelector("#productGalleryPrevious");
+  const nextPhotoButton = document.querySelector("#productGalleryNext");
   const productById = new Map(catalogRows.map((product) => [product.id, product]));
   const favoriteIds = new Set();
+  let activeGalleryProduct = null;
+  let activeGalleryIndex = 0;
   let activeCategory = "all";
   let showingAll = false;
   let cartItems = 0;
@@ -451,6 +468,38 @@ A|Cordless car care vacuum|980|4.7|88|Workshop pick|Cleanline Auto|1493238792000
     return `<span class="rating-stars" role="img" aria-label="Rated ${rating.toFixed(1)} out of 5">${markup}</span>`;
   };
 
+  const showProductImage = (index) => {
+    if (!activeGalleryProduct || !modalImage) return;
+    activeGalleryIndex = (index + activeGalleryProduct.images.length) % activeGalleryProduct.images.length;
+    const image = activeGalleryProduct.images[activeGalleryIndex];
+    modalImage.src = image.src;
+    modalImage.alt = image.alt;
+    if (galleryCounter) {
+      galleryCounter.textContent = `Photo ${activeGalleryIndex + 1} of ${activeGalleryProduct.images.length}`;
+    }
+    const hasAlternatePhotos = activeGalleryProduct.images.length > 1;
+    if (previousPhotoButton) previousPhotoButton.disabled = !hasAlternatePhotos;
+    if (nextPhotoButton) nextPhotoButton.disabled = !hasAlternatePhotos;
+    galleryThumbnails?.querySelectorAll(".gallery-thumb").forEach((thumbnail, thumbnailIndex) => {
+      const isActive = thumbnailIndex === activeGalleryIndex;
+      thumbnail.classList.toggle("is-active", isActive);
+      thumbnail.setAttribute("aria-pressed", String(isActive));
+    });
+  };
+
+  const renderProductGallery = (product) => {
+    activeGalleryProduct = product;
+    activeGalleryIndex = 0;
+    if (galleryThumbnails) {
+      galleryThumbnails.innerHTML = product.images.map((image, index) => `
+        <button class="gallery-thumb${index === 0 ? " is-active" : ""}" type="button" data-gallery-index="${index}" aria-label="Show photo ${index + 1} of ${escapeHTML(product.name)}" aria-pressed="${index === 0}">
+          <img src="${escapeHTML(image.src)}" alt="" loading="lazy">
+        </button>`).join("");
+      galleryThumbnails.hidden = product.images.length < 2;
+    }
+    showProductImage(0);
+  };
+
   const renderProduct = (product) => {
     const isFavorite = favoriteIds.has(product.id);
     const badgeClass = /new|arrival/i.test(product.badge) ? "badge-new" : /limited|small batch/i.test(product.badge) ? "badge-limited" : "";
@@ -459,6 +508,7 @@ A|Cordless car care vacuum|980|4.7|88|Workshop pick|Cleanline Auto|1493238792000
       <article class="product-card" data-product-id="${escapeHTML(product.id)}">
         <div class="product-image-wrap">
           <span class="product-badge ${badgeClass}">${escapeHTML(product.badge)}</span>
+          ${product.images.length > 1 ? `<span class="product-photo-count"><i class="fa-regular fa-images" aria-hidden="true"></i> ${product.images.length} photos</span>` : ""}
           <button class="favorite-button${isFavorite ? " is-favorite" : ""}" type="button" data-favorite aria-label="${isFavorite ? "Remove" : "Add"} ${escapeHTML(product.name)} ${isFavorite ? "from" : "to"} favorites" aria-pressed="${isFavorite}">
             <i class="${isFavorite ? "fa-solid" : "fa-regular"} fa-heart" aria-hidden="true"></i>
           </button>
@@ -625,9 +675,7 @@ A|Cordless car care vacuum|980|4.7|88|Workshop pick|Cleanline Auto|1493238792000
     const product = productById.get(detailsButton.dataset.productDetails);
     if (!product) return;
     document.querySelector("#productModalTitle").textContent = product.name;
-    const modalImage = document.querySelector("#productModalImage");
-    modalImage.src = product.image;
-    modalImage.alt = product.alt;
+    renderProductGallery(product);
     document.querySelector("#productModalCategory").textContent = product.category;
     document.querySelector("#productModalDescription").textContent = product.description;
     document.querySelector("#productModalPrice").textContent = formatPrice(product.price);
@@ -636,6 +684,13 @@ A|Cordless car care vacuum|980|4.7|88|Workshop pick|Cleanline Auto|1493238792000
     if (modal) modal.show();
     else showToast(`${product.name}: ${formatPrice(product.price)}`);
   });
+
+  galleryThumbnails?.addEventListener("click", (event) => {
+    const target = event.target instanceof Element ? event.target.closest("[data-gallery-index]") : null;
+    if (target) showProductImage(Number(target.dataset.galleryIndex));
+  });
+  previousPhotoButton?.addEventListener("click", () => showProductImage(activeGalleryIndex - 1));
+  nextPhotoButton?.addEventListener("click", () => showProductImage(activeGalleryIndex + 1));
 
   document.querySelector("#modalAddCart")?.addEventListener("click", (event) => {
     const product = productById.get(event.currentTarget.dataset.productId);
@@ -666,6 +721,13 @@ A|Cordless car care vacuum|980|4.7|88|Workshop pick|Cleanline Auto|1493238792000
   document.addEventListener("keydown", (event) => {
     const target = event.target;
     const isTyping = target instanceof HTMLElement && (target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName));
+    if (!isTyping && modalElement?.classList.contains("show") && activeGalleryProduct?.images.length > 1) {
+      if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+        event.preventDefault();
+        showProductImage(activeGalleryIndex + (event.key === "ArrowRight" ? 1 : -1));
+        return;
+      }
+    }
     if (event.key === "/" && !isTyping && searchInput) {
       event.preventDefault();
       searchInput.focus();

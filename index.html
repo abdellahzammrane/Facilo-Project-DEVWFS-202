@@ -258,7 +258,22 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content product-modal-content">
         <div class="modal-header"><h2 class="modal-title" id="productModalTitle">Product details</h2><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button></div>
-        <div class="modal-body"><img id="productModalImage" src="" alt=""><p class="product-category" id="productModalCategory"></p><p class="modal-description" id="productModalDescription"></p><strong class="product-price" id="productModalPrice"></strong></div>
+        <div class="modal-body">
+          <div class="product-modal-gallery" role="group" aria-label="Product photos">
+            <div class="product-modal-image-stage">
+              <img id="productModalImage" src="" alt="">
+              <button class="gallery-nav-button gallery-nav-previous" id="productGalleryPrevious" type="button" aria-label="Previous product photo">
+                <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+              </button>
+              <button class="gallery-nav-button gallery-nav-next" id="productGalleryNext" type="button" aria-label="Next product photo">
+                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+              </button>
+              <span class="gallery-counter" id="productGalleryCounter" aria-live="polite"></span>
+            </div>
+            <div class="product-gallery-thumbnails" id="productGalleryThumbnails" role="group" aria-label="Choose a product photo"></div>
+          </div>
+          <p class="product-category" id="productModalCategory"></p><p class="modal-description" id="productModalDescription"></p><strong class="product-price" id="productModalPrice"></strong>
+        </div>
         <div class="modal-footer"><button type="button" class="btn btn-outline-brand" data-bs-dismiss="modal">Keep browsing</button><button type="button" class="btn btn-brand" id="modalAddCart">Add to cart <i class="fa-solid fa-plus" aria-hidden="true"></i></button></div>
       </div>
     </div>
