@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <meta name="theme-color" content="#1E120B" id="themeColorMeta">
+  <meta name="description" content="Meet the vision, founders, and mobile app concept behind Facilo, a more considered marketplace for meaningful finds.">
+  <title>About Facilo | A marketplace with a point of view</title>
+
+  <!-- Set the saved theme before the shared styles render. -->
+  <script>
+    try {
+      const savedTheme = localStorage.getItem("facilo-theme");
+      if (savedTheme === "light" || savedTheme === "dark") {
+        document.documentElement.dataset.theme = savedTheme;
+      }
+    } catch (_) {}
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <!-- Shared sticky glass navigation -->
+  <header class="site-header">
+    <nav class="navbar navbar-expand-xl navbar-dark" aria-label="Primary navigation">
+      <div class="container nav-shell">
+        <a class="navbar-brand brand-mark" href="index.html#home" aria-label="Facilo home">
+          <span class="logo-crop nav-logo-crop"><img src="assets/facilo.png" width="140" height="140" alt="Facilo Logo"></span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavigation" aria-controls="mainNavigation" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNavigation">
+          <ul class="navbar-nav nav-links mx-auto">
+            <li class="nav-item"><a class="nav-link" href="index.html#home">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#categories">Categories</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#explore">Explore</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+            <li class="nav-item"><a class="nav-link" href="support.html">Support</a></li>
+            <li class="nav-item"><a class="nav-link active" href="about.html" aria-current="page">About</a></li>
+          </ul>
+
+          <div class="nav-actions">
+            <form class="nav-search" role="search" id="searchForm" action="index.html#explore">
+              <label class="visually-hidden" for="siteSearch">Search products</label>
+              <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+              <input id="siteSearch" type="search" placeholder="Search products" autocomplete="off">
+              <span class="search-shortcut" aria-hidden="true">/</span>
+            </form>
+            <button class="cart-button" type="button" aria-label="Shopping cart, 0 items">
+              <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
+              <span class="cart-count-badge" id="cartCount" aria-live="polite">0</span>
+            </button>
+            <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light theme" aria-pressed="false">
+              <span class="theme-toggle-track" aria-hidden="true">
+                <i class="fa-solid fa-moon"></i>
+                <i class="fa-solid fa-sun"></i>
+                <span class="theme-toggle-thumb"></span>
+              </span>
+              <span class="theme-toggle-label">Dark</span>
+            </button>
+            <a class="nav-login" href="login.html">Log in</a>
+            <a class="btn btn-brand btn-small btn-shimmer" href="register.html">Register <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <!-- A cinematic introduction to the Facilo point of view -->
+    <section class="about-hero-section" id="about-story" aria-labelledby="about-title">
+      <div class="about-hero-halo about-hero-halo-one" aria-hidden="true"></div>
+      <div class="about-hero-halo about-hero-halo-two" aria-hidden="true"></div>
+      <div class="container about-hero-grid">
+        <div class="about-hero-copy">
+          <p class="about-hero-badge"><i class="fa-solid fa-sparkles" aria-hidden="true"></i> About Facilo <span>Our story</span></p>
+          <h1 id="about-title">Good things are<br>better <span>found together.</span></h1>
+          <p class="about-hero-lede">Facilo brings thoughtful products and trusted people into one welcoming place. We are building a marketplace where discovery feels personal, quality feels closer, and every find has a story.</p>
+          <div class="about-hero-actions">
+            <a class="btn btn-brand btn-shimmer" href="#founders">Meet the founders <i class="fa-solid fa-arrow-down" aria-hidden="true"></i></a>
+            <a class="btn btn-outline-brand" href="index.html#explore">Explore the marketplace <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          </div>
+          <div class="about-hero-note"><span class="about-note-icon"><i class="fa-solid fa-compass" aria-hidden="true"></i></span><span><strong>Made for the curious</strong><small>For everyday things worth finding.</small></span></div>
+        </div>
+
+        <div class="about-hero-art" aria-hidden="true">
+          <div class="about-orbit about-orbit-outer"></div>
+          <div class="about-orbit about-orbit-inner"></div>
+          <div class="about-orbit-core"><span class="about-core-glow"></span><i class="fa-solid fa-bag-shopping"></i><small>F / 01</small></div>
+          <div class="about-float-card about-float-card-top"><i class="fa-solid fa-circle-check"></i><span><strong>Thoughtfully chosen</strong><small>Quality with a point of view</small></span></div>
+          <div class="about-float-card about-float-card-bottom"><i class="fa-solid fa-heart"></i><span><strong>Good finds, closer</strong><small>Made to fit your everyday</small></span></div>
+          <span class="about-art-spark about-art-spark-one"><i class="fa-solid fa-star"></i></span>
+          <span class="about-art-spark about-art-spark-two"><i class="fa-solid fa-sparkles"></i></span>
+        </div>
+      </div>
+      <a class="about-scroll-cue" href="#impact"><span></span> A little about us</a>
+    </section>
+
+    <!-- A quick look at the platform's ambition -->
+    <section class="about-stats-section" id="impact" aria-labelledby="impact-title">
+      <div class="container">
+        <div class="about-section-heading">
+          <p class="eyebrow"><span class="eyebrow-line"></span> Small team, wide horizons</p>
+          <h2 id="impact-title">Built around <span>better discovery.</span></h2>
+          <p>Every detail points back to a simple idea: shopping should feel clear, trusted, and a little more inspiring.</p>
+        </div>
+        <div class="about-stats-grid">
+          <article class="about-stat-card"><span class="about-stat-icon"><i class="fa-solid fa-box-open" aria-hidden="true"></i></span><strong>10K<span>+</span></strong><h3>Premium products</h3><p>A growing collection across the things you care about.</p></article>
+          <article class="about-stat-card"><span class="about-stat-icon"><i class="fa-solid fa-face-smile" aria-hidden="true"></i></span><strong>99.8<span>%</span></strong><h3>Client satisfaction</h3><p>Trust and care are part of every good experience.</p></article>
+          <article class="about-stat-card"><span class="about-stat-icon"><i class="fa-solid fa-people-group" aria-hidden="true"></i></span><strong>03</strong><h3>Visionary founders</h3><p>One shared vision, brought to life by three builders.</p></article>
+          <article class="about-stat-card"><span class="about-stat-icon"><i class="fa-solid fa-headset" aria-hidden="true"></i></span><strong>24<span>/7</span></strong><h3>Global support</h3><p>Helpful guidance, wherever your next find takes you.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- The team behind the marketplace -->
+    <section class="founders-section" id="founders" aria-labelledby="founders-title">
+      <div class="container">
+        <div class="about-section-heading founders-heading">
+          <p class="eyebrow"><span class="eyebrow-line"></span> The people behind Facilo</p>
+          <h2 id="founders-title">Three minds. <span>One marketplace.</span></h2>
+          <p>A close-knit founding team bringing product thinking, design craft, and engineering together.</p>
+        </div>
+
+        <div class="founder-grid">
+          <article class="founder-card founder-card-one">
+            <div class="founder-portrait founder-portrait-one" role="img" aria-label="Initials avatar for AbdellaH ZammRane"><span>AZ</span><i class="fa-solid fa-sparkles" aria-hidden="true"></i></div>
+            <div class="founder-card-body"><span class="founder-label">Project owner</span><h3>AbdellaH ZammRane</h3><p class="founder-role">The Project Owner / UI Developer</p><p class="founder-bio">Shaping Facilo's experience from first impression to the smallest interaction.</p><div class="founder-socials" aria-label="AbdellaH ZammRane links"><a href="https://www.linkedin.com/search/results/people/?keywords=AbdellaH%20ZammRane" target="_blank" rel="noopener noreferrer" aria-label="Search for AbdellaH ZammRane on LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a><a href="https://github.com/search?q=AbdellaH+ZammRane&amp;type=users" target="_blank" rel="noopener noreferrer" aria-label="Search for AbdellaH ZammRane on GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a></div></div>
+          </article>
+
+          <article class="founder-card founder-card-two">
+            <div class="founder-portrait founder-portrait-two" role="img" aria-label="Initials avatar for Ilias Yekhlef"><span>IY</span><i class="fa-solid fa-sparkles" aria-hidden="true"></i></div>
+            <div class="founder-card-body"><span class="founder-label">Assistant developer</span><h3>Ilias Yekhlef</h3><p class="founder-role">The Assistant / Connection Dashboard Developer</p><p class="founder-bio">Turning thoughtful ideas into reliable tools for shoppers and sellers.</p><div class="founder-socials" aria-label="Ilias Yekhlef links"><a href="https://www.linkedin.com/search/results/people/?keywords=Ilias%20Yekhlef" target="_blank" rel="noopener noreferrer" aria-label="Search for Ilias Yekhlef on LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a><a href="https://github.com/search?q=Ilias+Yekhlef&amp;type=users" target="_blank" rel="noopener noreferrer" aria-label="Search for Ilias Yekhlef on GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a></div></div>
+          </article>
+
+          <article class="founder-card founder-card-three">
+            <div class="founder-portrait founder-portrait-three" role="img" aria-label="Initials avatar for Mohammed Tarcholi"><span>MT</span><i class="fa-solid fa-sparkles" aria-hidden="true"></i></div>
+            <div class="founder-card-body"><span class="founder-label">Customer care</span><h3>Mohammed Tarcholi</h3><p class="founder-role">Customer Service Agent / Contact Agent</p><p class="founder-bio">Building the foundations that help every good find feel effortless.</p><div class="founder-socials" aria-label="Mohammed Tarcholi links"><a href="https://www.linkedin.com/search/results/people/?keywords=Mohammed%20Tarcholi" target="_blank" rel="noopener noreferrer" aria-label="Search for Mohammed Tarcholi on LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a><a href="https://github.com/search?q=Mohammed+Tarcholi&amp;type=users" target="_blank" rel="noopener noreferrer" aria-label="Search for Mohammed Tarcholi on GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a></div></div>
+          </article>
+        </div>
+        <p class="founder-social-note"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> Social icons open a name search until personal profile links are added.</p>
+      </div>
+    </section>
+
+    <!-- Figma concept for the Facilo mobile experience -->
+    <section class="app-concept-section" id="app-concept" aria-labelledby="app-concept-title">
+      <div class="container app-concept-grid">
+        <div class="app-showcase-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span> Facilo, wherever you go</p>
+          <h2 id="app-concept-title">A considered marketplace,<br><span>made pocket-sized.</span></h2>
+          <p>Our mobile app concept brings the Facilo experience into a clean, calm interface designed in Figma. Browse standout finds, save what you love, and keep good discoveries close.</p>
+          <div class="app-platform-note"><span><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i></span><p><strong>Designed for iOS and Android</strong><small>A cross-platform concept for wherever inspiration starts.</small></p></div>
+          <div class="app-store-links" aria-label="App store concept links">
+            <a class="store-badge" href="https://play.google.com/store/search?q=Facilo&amp;c=apps" target="_blank" rel="noopener noreferrer" aria-label="Search Google Play for Facilo. Concept preview, app not yet released">
+              <i class="fa-brands fa-google-play" aria-hidden="true"></i><span><small>GET IT ON</small><strong>Google Play</strong></span>
+            </a>
+            <a class="store-badge" href="https://apps.apple.com/us/search?term=Facilo" target="_blank" rel="noopener noreferrer" aria-label="Search the Apple App Store for Facilo. Concept preview, app not yet released">
+              <i class="fa-brands fa-apple" aria-hidden="true"></i><span><small>Download on the</small><strong>App Store</strong></span>
+            </a>
+          </div>
+          <p class="app-coming-soon"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> Figma concept preview. Store listings are coming soon.</p>
+        </div>
+
+        <div class="app-showcase-visual">
+          <div class="app-device-aura" aria-hidden="true"></div>
+          <div class="app-phone-mockup" role="img" aria-label="French language Facilo mobile app concept mockup">
+            <div class="phone-side-button phone-side-button-one" aria-hidden="true"></div>
+            <div class="phone-side-button phone-side-button-two" aria-hidden="true"></div>
+            <div class="phone-screen" lang="fr">
+              <div class="phone-statusbar"><span>9:41</span><span><i class="fa-solid fa-signal" aria-hidden="true"></i><i class="fa-solid fa-wifi" aria-hidden="true"></i><i class="fa-solid fa-battery-full" aria-hidden="true"></i></span></div>
+              <div class="phone-appbar"><span class="phone-wordmark">facilo<span>.</span></span><div class="phone-user-greeting"><span>Bonjour</span><strong>[Utilisateur]</strong></div><span class="phone-profile-icon"><i class="fa-regular fa-user" aria-hidden="true"></i></span></div>
+              <div class="phone-search"><i class="fa-solid fa-arrow-left phone-search-back" aria-hidden="true"></i><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span>Découvrir des articles...</span></div>
+
+              <div class="phone-section-line phone-section-categories"><strong>Catégories</strong></div>
+              <div class="phone-category-grid">
+                <article class="phone-category"><img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&amp;fit=crop&amp;w=220&amp;h=115&amp;q=80" alt="" loading="lazy"><span>Mobilier &amp; déco</span></article>
+                <article class="phone-category"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&amp;fit=crop&amp;w=220&amp;h=115&amp;q=80" alt="" loading="lazy"><span>Technologie</span></article>
+                <article class="phone-category"><img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&amp;fit=crop&amp;w=220&amp;h=115&amp;q=80" alt="" loading="lazy"><span>Voitures</span></article>
+                <article class="phone-category"><img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&amp;fit=crop&amp;w=220&amp;h=115&amp;q=80" alt="" loading="lazy"><span>Mobilité urbaine</span></article>
+                <article class="phone-category"><img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&amp;fit=crop&amp;w=220&amp;h=115&amp;q=80" alt="" loading="lazy"><span>Livres &amp; médias</span></article>
+                <article class="phone-category"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&amp;fit=crop&amp;w=220&amp;h=115&amp;q=80" alt="" loading="lazy"><span>Sports &amp; loisirs</span></article>
+              </div>
+
+              <div class="phone-section-line phone-spotlights-title"><strong>À la une</strong><span>Explorer <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></div>
+              <article class="phone-mini-promo"><div><small>OBJETS EN VEDETTE</small><strong>Sac à dos V4<br>à partir de 125 $</strong><span class="phone-slider-dots" aria-hidden="true"><i></i><i></i><i></i></span></div><img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&amp;fit=crop&amp;w=320&amp;h=180&amp;q=82" alt="Sac à dos mis en avant" loading="lazy"></article>
+              <article class="phone-wide-promo"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&amp;fit=crop&amp;w=520&amp;h=190&amp;q=82" alt="Montre élégante mise en avant" loading="lazy"><div><small>COLLECTION EXCLUSIVE</small><strong>Montres suisses<br>de luxe</strong><span>À partir de 8 500 $</span></div><span class="phone-slider-dots" aria-hidden="true"><i></i><i></i><i></i></span></article>
+
+              <div class="phone-section-line phone-selection-title"><strong>Sélection du moment</strong><span>Voir tout</span></div>
+              <div class="phone-selection-grid">
+                <article class="phone-selection-item"><img src="https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&amp;fit=crop&amp;w=160&amp;h=160&amp;q=80" alt="" loading="lazy"><span><strong>Parfum d'exception</strong><small>140 $</small></span></article>
+                <article class="phone-selection-item"><img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&amp;fit=crop&amp;w=160&amp;h=160&amp;q=80" alt="" loading="lazy"><span><strong>Sac d'affaires</strong><small>550 $</small></span></article>
+                <article class="phone-selection-item"><img src="https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&amp;fit=crop&amp;w=160&amp;h=160&amp;q=80" alt="" loading="lazy"><span><strong>Fauteuil design</strong><small>1 800 $</small></span></article>
+                <article class="phone-selection-item"><img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&amp;fit=crop&amp;w=160&amp;h=160&amp;q=80" alt="" loading="lazy"><span><strong>Livre d'artiste</strong><small>220 $</small></span></article>
+              </div>
+              <div class="phone-tabbar"><span class="is-current"><i class="fa-solid fa-house" aria-hidden="true"></i>Accueil</span><span><i class="fa-solid fa-compass" aria-hidden="true"></i>Explorer</span><span><i class="fa-regular fa-heart" aria-hidden="true"></i>Favoris</span><span><i class="fa-regular fa-user" aria-hidden="true"></i>Profil</span></div>
+            </div>
+          </div>
+          <div class="app-figma-tag"><span><i class="fa-brands fa-figma" aria-hidden="true"></i></span><strong>Designed in Figma</strong><small>Mobile experience concept</small></div>
+          <div class="app-availability-tag"><i class="fa-solid fa-arrow-right-arrow-left" aria-hidden="true"></i><span><strong>One experience</strong><small>Across your devices</small></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-closing-section" aria-label="Explore the Facilo marketplace">
+      <div class="container about-closing-card"><span class="about-closing-icon"><i class="fa-solid fa-compass" aria-hidden="true"></i></span><div><p class="eyebrow">Your next good find is waiting</p><h2>Come see what feels like <span>you.</span></h2></div><a class="btn btn-brand btn-shimmer" href="index.html#explore">Explore Facilo <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+    </section>
+  </main>
+
+  <!-- Shared site footer -->
+  <footer class="site-footer" id="vendor">
+    <div class="container footer-main">
+      <div class="footer-brand-column">
+        <a class="footer-logo" href="index.html#home" aria-label="Facilo home"><span class="logo-crop"><img src="assets/facilo.png" width="140" height="140" alt="Facilo Logo"></span></a>
+        <p>A more considered marketplace for the things that make life yours.</p>
+        <div class="social-links" aria-label="Social media">
+          <a href="https://www.instagram.com/" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+          <a href="https://www.facebook.com/" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+          <a href="https://www.pinterest.com/" aria-label="Pinterest"><i class="fa-brands fa-pinterest-p" aria-hidden="true"></i></a>
+          <a href="https://www.linkedin.com/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
+        </div>
+      </div>
+      <div class="footer-column"><h2>Discover</h2><a href="index.html#categories">Categories</a><a href="index.html#explore">Featured finds</a><a href="products.html?sort=newest">New arrivals</a><a href="register.html?role=vendor">Become a seller</a></div>
+      <div class="footer-column"><h2>About Facilo</h2><a href="#about-story">Our story</a><a href="#impact">Our impact</a><a href="#founders">Meet the founders</a><a href="contact.html">Contact us</a></div>
+      <div class="footer-column"><h2>Need a hand?</h2><a href="support.html">Help center</a><a href="shipping.html">Shipping &amp; returns</a><a href="privacy.html">Privacy policy</a><a href="terms.html">Terms of service</a></div>
+    </div>
+    <div class="container footer-bottom"><p>&copy; <span id="currentYear">2026</span> Facilo. Made for the things you love.</p><p><i class="fa-solid fa-globe" aria-hidden="true"></i> Made for good finds, everywhere.</p></div>
+  </footer>
+
+  <div class="toast-message" id="toastMessage" role="status" aria-live="polite"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

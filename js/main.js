@@ -47,6 +47,13 @@ document.addEventListener("DOMContentLoaded", () => {
       scheduleStagger(".product-card", 1050, 34);
       scheduleStagger(".benefit-item", 1750, 90, 270);
       scheduleStagger(".newsletter-inner", 2150, 0);
+      scheduleStagger(".about-hero-copy", 120, 0);
+      scheduleStagger(".about-hero-art", 260, 0);
+      scheduleStagger(".about-stat-card", 520, 75, 225);
+      scheduleStagger(".founder-card", 900, 115, 230);
+      scheduleStagger(".app-showcase-copy", 1450, 0);
+      scheduleStagger(".app-phone-mockup", 1580, 0);
+      scheduleStagger(".about-closing-card", 1900, 0);
       scheduleStagger(".site-footer .footer-main", 2300, 0);
       scheduleStagger(".site-footer .footer-bottom", 2450, 0);
     };
@@ -417,6 +424,8 @@ A|Cordless car care vacuum|980|4.7|88|Workshop pick|Cleanline Auto|1493238792000
   const searchForm = document.querySelector("#searchForm");
   const searchInput = document.querySelector("#siteSearch");
   const productGrid = document.querySelector("#productGrid");
+  const initialSearch = new URLSearchParams(window.location.search).get("search");
+  if (searchInput && initialSearch) searchInput.value = initialSearch;
   const emptyState = document.querySelector("#emptyState");
   const catalogNote = document.querySelector("#catalogNote");
   const showAllButton = document.querySelector("#showAllProducts");
@@ -621,6 +630,14 @@ A|Cordless car care vacuum|980|4.7|88|Workshop pick|Cleanline Auto|1493238792000
   searchInput?.addEventListener("input", updateCatalog);
   searchForm?.addEventListener("submit", (event) => {
     event.preventDefault();
+    if (!productGrid) {
+      const marketplaceURL = new URL("index.html", window.location.href);
+      const searchTerm = searchInput?.value.trim();
+      if (searchTerm) marketplaceURL.searchParams.set("search", searchTerm);
+      marketplaceURL.hash = "explore";
+      window.location.assign(marketplaceURL.href);
+      return;
+    }
     updateCatalog();
     document.querySelector("#explore")?.scrollIntoView({ behavior: "smooth" });
   });
