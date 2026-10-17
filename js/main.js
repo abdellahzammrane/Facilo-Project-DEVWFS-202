@@ -440,7 +440,9 @@ A|Cordless car care vacuum|980|4.7|88|Workshop pick|Cleanline Auto|1493238792000
   const previousPhotoButton = document.querySelector("#productGalleryPrevious");
   const nextPhotoButton = document.querySelector("#productGalleryNext");
   const productById = new Map(catalogRows.map((product) => [product.id, product]));
-  const favoriteIds = new Set();
+  let favoriteProducts = [];
+  try { favoriteProducts = JSON.parse(window.localStorage.getItem("facilo-favorite-products") || "[]"); if (!Array.isArray(favoriteProducts)) favoriteProducts = []; } catch (_) { favoriteProducts = []; }
+  const favoriteIds = new Set(favoriteProducts.map((product) => product.id));
   let activeGalleryProduct = null;
   let activeGalleryIndex = 0;
   let activeCategory = "all";
@@ -672,6 +674,10 @@ A|Cordless car care vacuum|980|4.7|88|Workshop pick|Cleanline Auto|1493238792000
       const isFavorite = !favoriteIds.has(product.id);
       if (isFavorite) favoriteIds.add(product.id);
       else favoriteIds.delete(product.id);
+      const savedIndex = favoriteProducts.findIndex((savedProduct) => savedProduct.id === product.id);
+      if (isFavorite && savedIndex < 0) favoriteProducts.push(product);
+      if (!isFavorite && savedIndex >= 0) favoriteProducts.splice(savedIndex, 1);
+      try { window.localStorage.setItem("facilo-favorite-products", JSON.stringify(favoriteProducts)); } catch (_) {}
       favoriteButton.classList.toggle("is-favorite", isFavorite);
       favoriteButton.setAttribute("aria-pressed", String(isFavorite));
       favoriteButton.setAttribute("aria-label", `${isFavorite ? "Remove" : "Add"} ${product.name} ${isFavorite ? "from" : "to"} favorites`);

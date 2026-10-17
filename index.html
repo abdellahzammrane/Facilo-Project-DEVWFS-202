@@ -43,13 +43,16 @@
 
         <div class="collapse navbar-collapse" id="mainNavigation">
           <ul class="navbar-nav nav-links mx-auto">
-            <li class="nav-item"><a class="nav-link active" aria-current="page" href="#home">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="#categories">Categories</a></li>
-            <li class="nav-item"><a class="nav-link" href="#explore">Explore</a></li>
-            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-            <li class="nav-item"><a class="nav-link" href="support.html">Support</a></li>
-            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-          </ul>
+<li class="nav-item"><a class="nav-link" href="index.html#home">Home</a></li>
+<li class="nav-item"><a class="nav-link" href="index.html#categories">Categories</a></li>
+<li class="nav-item"><a class="nav-link" href="index.html#explore">Explore</a></li>
+<li class="nav-item account-menu"><button class="nav-link account-menu-trigger" type="button" aria-haspopup="true"><i class="fa-regular fa-user" aria-hidden="true"></i><span>Account</span><i class="fa-solid fa-chevron-down account-chevron" aria-hidden="true"></i></button>
+<div class="dropdown-menu account-menu-panel">
+<a class="account-profile" href="profile-setting.html"><span class="account-avatar" aria-hidden="true">F</span><span class="account-profile-copy"><strong class="account-name">Your profile</strong><small class="account-email">Manage your Facilo account</small></span><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+<a class="account-settings-link" href="profile-setting.html"><span class="account-settings-icon"><i class="fa-solid fa-sliders" aria-hidden="true"></i></span><span><strong>Profile settings</strong><small>Update your personal information</small></span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+<div class="account-menu-divider"></div>
+<nav class="account-shortcuts" aria-label="More pages"><a href="favorites.html">Favorites</a><a href="my-ads.html">My ads</a><a href="seller-profile.html">Seller profile</a><a href="contact.html">Contact</a><a href="about.html">About</a><a href="help-fag.html">Help</a><a href="terms.html">Terms</a></nav>
+</div></li></ul>
 
           <div class="nav-actions">
             <form class="nav-search" role="search" id="searchForm">
@@ -248,7 +251,7 @@
       </div>
       <div class="footer-column"><h2>Discover</h2><a href="#categories">Categories</a><a href="#explore">Featured finds</a><a href="products.html?sort=newest">New arrivals</a><a href="register.html?role=vendor">Become a seller</a></div>
       <div class="footer-column"><h2>About Facilo</h2><a href="#about">Our story</a><a href="#about">How it works</a><a href="#about">Trust &amp; safety</a><a href="contact.html">Contact us</a></div>
-      <div class="footer-column"><h2>Need a hand?</h2><a href="support.html">Help center</a><a href="shipping.html">Shipping &amp; returns</a><a href="privacy.html">Privacy policy</a><a href="terms.html">Terms of service</a></div>
+      <div class="footer-column"><h2>Need a hand?</h2><a href="help-fag.html">Popular questions</a><a href="shipping.html">Shipping &amp; returns</a><a href="privacy.html">Privacy policy</a><a href="terms.html">Terms of service</a></div>
     </div>
     <div class="container footer-bottom"><p>© <span id="currentYear">2026</span> Facilo. Made for the things you love.</p><p><i class="fa-solid fa-globe" aria-hidden="true"></i> Made for good finds, everywhere.</p></div>
   </footer>
@@ -283,5 +286,5 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <script src="js/main.js" defer></script>
-</body>
+<script src="js/account-menu.js" defer></script></body>
 </html>
