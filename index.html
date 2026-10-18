@@ -90,6 +90,22 @@
         <p class="eyebrow hero-eyebrow"><span class="eyebrow-line"></span> Curated finds. Trusted sellers. <span class="eyebrow-line"></span></p>
         <h1 id="hero-title">A smarter way to<br><span>shop what you love.</span></h1>
         <p class="hero-copy">Meet your next favorite thing. Explore a considered collection of products from independent makers and trusted brands, all in one place.</p>
+        <div class="hero-search-block">
+          <form class="hero-search-box" id="heroSearchForm" role="search">
+            <label class="visually-hidden" for="heroSearch">Search the Facilo marketplace</label>
+            <svg class="hero-search-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.7"></circle><path d="m16 16 4.3 4.3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path></svg>
+            <div class="hero-search-controls">
+              <div class="trending-tags" role="group" aria-label="Quick trending searches">
+                <button type="button" class="trending-tag" data-search-tag="#LuxuryWatches" aria-pressed="false">#LuxuryWatches</button>
+                <button type="button" class="trending-tag" data-search-tag="#DesignFurniture" aria-pressed="false">#DesignFurniture</button>
+                <button type="button" class="trending-tag" data-search-tag="#TechPremium" aria-pressed="false">#TechPremium</button>
+                <button type="button" class="trending-tag" data-search-tag="#Automotive" aria-pressed="false">#Automotive</button>
+              </div>
+              <input id="heroSearch" type="text" readonly autocomplete="off" aria-readonly="true">
+            </div>
+            <button class="hero-search-submit" type="submit"><span>Explore</span><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3.5 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+          </form>
+        </div>
         <div class="hero-ctas">
           <div class="galaxy-button">
             <button class="galaxy-action" type="button" data-scroll-target="#explore">
@@ -262,20 +278,31 @@
       <div class="modal-content product-modal-content">
         <div class="modal-header"><h2 class="modal-title" id="productModalTitle">Product details</h2><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button></div>
         <div class="modal-body">
-          <div class="product-modal-gallery" role="group" aria-label="Product photos">
-            <div class="product-modal-image-stage">
-              <img id="productModalImage" src="" alt="">
-              <button class="gallery-nav-button gallery-nav-previous" id="productGalleryPrevious" type="button" aria-label="Previous product photo">
-                <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
-              </button>
-              <button class="gallery-nav-button gallery-nav-next" id="productGalleryNext" type="button" aria-label="Next product photo">
-                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-              </button>
-              <span class="gallery-counter" id="productGalleryCounter" aria-live="polite"></span>
+          <div class="product-modal-layout">
+            <div class="product-modal-gallery" role="group" aria-label="Product photos">
+              <div class="product-modal-image-stage">
+                <img id="productModalImage" src="" alt="">
+                <button class="gallery-nav-button gallery-nav-previous" id="productGalleryPrevious" type="button" aria-label="Previous product photo">
+                  <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+                </button>
+                <button class="gallery-nav-button gallery-nav-next" id="productGalleryNext" type="button" aria-label="Next product photo">
+                  <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                </button>
+                <span class="gallery-counter" id="productGalleryCounter" aria-live="polite"></span>
+              </div>
+              <div class="product-gallery-thumbnails" id="productGalleryThumbnails" role="group" aria-label="Choose a product photo"></div>
             </div>
-            <div class="product-gallery-thumbnails" id="productGalleryThumbnails" role="group" aria-label="Choose a product photo"></div>
+            <div class="product-modal-details">
+              <p class="product-category" id="productModalCategory"></p>
+              <p class="modal-description" id="productModalDescription"></p>
+              <dl class="product-modal-specs">
+                <div><dt>Seller</dt><dd id="productModalSeller"></dd></div>
+                <div><dt>Community rating</dt><dd id="productModalRating"></dd></div>
+                <div><dt>Listing note</dt><dd id="productModalBadge"></dd></div>
+              </dl>
+              <strong class="product-price" id="productModalPrice"></strong>
+            </div>
           </div>
-          <p class="product-category" id="productModalCategory"></p><p class="modal-description" id="productModalDescription"></p><strong class="product-price" id="productModalPrice"></strong>
         </div>
         <div class="modal-footer"><button type="button" class="btn btn-outline-brand" data-bs-dismiss="modal">Keep browsing</button><button type="button" class="btn btn-brand" id="modalAddCart">Add to cart <i class="fa-solid fa-plus" aria-hidden="true"></i></button></div>
       </div>

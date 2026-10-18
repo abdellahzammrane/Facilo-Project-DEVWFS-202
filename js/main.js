@@ -352,11 +352,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Eight distinct products are available in each category. Featured rows
   // provide a compact first view; the full 40-item catalog stays one click away.
-  // Optional final column: comma-separated image URLs or assets paths, e.g.
-  // featured|assets/headphones-side.jpg,assets/headphones-back.jpg.
+  // Optional columns: gallery image IDs/URLs, then an exclusive listing ribbon.
+  // Example: featured||Limited Edition (empty gallery column, custom ribbon).
   const catalogRows = `
 E|Studio wireless headphones|1890|4.9|128|Bestseller|Soundroom|1505740420928-5e560c06d30e|Amber over-ear wireless headphones|Studio-tuned sound and soft memory foam make these a comfortable daily listening companion.|featured
-E|Pocket mirrorless camera|6490|4.8|76|Editor's pick|Frame & Field|1516035069371-29a1b244cc32|Compact mirrorless camera on a neutral surface|A compact camera made for everyday documentation, weekend travel and the occasional happy accident.|featured
+E|Pocket mirrorless camera|6490|4.8|76|Editor's pick|Frame & Field|1516035069371-29a1b244cc32|Compact mirrorless camera on a neutral surface|A compact camera made for everyday documentation, weekend travel and the occasional happy accident.|featured||Verified
 E|Tactile mechanical keyboard|1250|4.7|94|Top rated|Key House|1587829741301-dc798b83add3|Mechanical keyboard on a tidy desk|A weighted aluminum keyboard with warm tactile switches and a clean layout for a considered desk setup.|-
 E|Everyday smart watch|2190|4.8|112|New arrival|North Circuit|1546868871-7041f2a55e12|Modern smartwatch with a clean display|A refined smart watch for everyday movement, reminders and quick connections.|-
 E|Portable Bluetooth speaker|890|4.8|83|Travel favorite|Soundroom|1608043152269-423dbba4e7e1|Portable wireless speaker ready for travel|Rich, room-filling sound in a portable design made for home, picnics and weekend escapes.|-
@@ -370,8 +370,8 @@ F|Relaxed linen shirt|790|4.7|92|Natural fibers|Atelier Noura|1598033129183-c4f5
 F|Sienna leather crossbody|1780|4.8|74|Hand finished|Atelier Noura|1584917865442-de89df76afd3|Compact leather crossbody bag|A compact crossbody bag with useful compartments, an adjustable strap and hand-finished leather.|-
 F|Acetate frame sunglasses|640|4.6|66|New arrival|Sol Studio|1511499767150-a48a237f0083|Classic sunglasses in warm acetate|A timeless acetate frame with UV-protective lenses and a comfortable fit for bright days.|-
 F|Commuter canvas backpack|1120|4.7|109|Everyday carry|Common Ground|1553062407-98eeb64c6a62|Durable canvas backpack for everyday use|A practical canvas backpack with a padded laptop sleeve and easy-access pockets for city days.|-
-F|Minimal automatic watch|3200|4.9|64|Limited edition|Hour & Form|1523275335684-37898b6baf30|Minimal wristwatch with a cream dial|A clean automatic watch with a balanced dial and polished steel case, designed for daily wear.|-
-H|Sculpted ceramic table lamp|980|5.0|42|Hand finished|Clay House|1507473885765-e6ed057f782c|Sculptural table lamp with a warm glow|A handmade ceramic base and diffused light bring a calm accent to bedside tables and reading corners.|featured
+F|Minimal automatic watch|3200|4.9|64|Collector's pick|Hour & Form|1523275335684-37898b6baf30|Minimal wristwatch with a cream dial|A clean automatic watch with a balanced dial and polished steel case, designed for daily wear.|-||Limited Edition
+H|Sculpted ceramic table lamp|980|5.0|42|Hand finished|Clay House|1507473885765-e6ed057f782c|Sculptural table lamp with a warm glow|A handmade ceramic base and diffused light bring a calm accent to bedside tables and reading corners.|featured||One of a kind
 H|Loomed lounge chair|4850|4.9|38|New arrival|Form & Fiber|1567538096630-e0c55bd6374c|Contemporary lounge chair in a warm interior|A sculptural frame and natural woven seat make this a comfortable place for slow mornings and long reads.|featured
 H|Artisan stoneware dinner set|1180|4.8|59|Small batch|Clay House|1578749556568-bc2c40e68b61|Artisan ceramics arranged on a tabletop|A small-batch stoneware set with naturally varied glaze, made for everyday meals and long dinners.|-
 H|Washed linen bedding set|1690|4.8|87|Soft touch|Casa Linen|1631049307264-da0ec9d70304|Soft neutral bedding in a light-filled bedroom|Breathable washed linen bedding with a relaxed texture that gets softer with every wash.|-
@@ -396,7 +396,7 @@ A|All-weather floor mat set|690|4.7|62|Everyday protection|Drive Goods|150422249
 A|Roof cargo travel bag|1290|4.8|73|Weekend favorite|Route One|1533473359331-0135ef1b58bf|Car packed for a scenic road trip|A weather-resistant cargo bag that adds flexible storage for longer drives and weekend escapes.|-
 A|Cordless car care vacuum|980|4.7|88|Workshop pick|Cleanline Auto|1493238792000-8113da705763|Polished car ready for a detailed clean|A compact cordless vacuum with useful attachments for keeping seats, mats and hard-to-reach corners tidy.|-
   `.trim().split("\n").map((row, index) => {
-    const [code, name, price, rating, reviews, badge, seller, imageId, alt, description, featured, galleryIds = ""] = row.trim().split("|");
+    const [code, name, price, rating, reviews, badge, seller, imageId, alt, description, featured, galleryIds = "", exclusiveBadge = ""] = row.trim().split("|");
     const photoIds = [imageId, ...galleryIds.split(",").map((photoId) => photoId.trim()).filter(Boolean)];
     const images = photoIds.map((photoId, imageIndex) => ({
       src: /^https?:\/\//i.test(photoId) || photoId.startsWith("assets/")
@@ -417,15 +417,19 @@ A|Cordless car care vacuum|980|4.7|88|Workshop pick|Cleanline Auto|1493238792000
       images,
       alt,
       description,
+      exclusiveBadge,
       featured: featured === "featured"
     };
   });
 
   const searchForm = document.querySelector("#searchForm");
   const searchInput = document.querySelector("#siteSearch");
+  const heroSearchForm = document.querySelector("#heroSearchForm");
+  const heroSearchInput = document.querySelector("#heroSearch");
   const productGrid = document.querySelector("#productGrid");
   const initialSearch = new URLSearchParams(window.location.search).get("search");
   if (searchInput && initialSearch) searchInput.value = initialSearch;
+  let activeSearchTerm = searchInput?.value || "";
   const emptyState = document.querySelector("#emptyState");
   const catalogNote = document.querySelector("#catalogNote");
   const showAllButton = document.querySelector("#showAllProducts");
@@ -457,6 +461,12 @@ A|Cordless car care vacuum|980|4.7|88|Workshop pick|Cleanline Auto|1493238792000
   }[character]));
   const normalize = (value) => value.toLocaleLowerCase().trim();
   const formatPrice = (price) => `MAD ${new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 }).format(price)}`;
+  const trendingSearchAliases = new Map([
+    ["#luxurywatches", "watch"],
+    ["#designfurniture", "home & living"],
+    ["#techpremium", "electronics"],
+    ["#automotive", "automotive"]
+  ]);
 
   const showToast = (message) => {
     const toast = document.querySelector("#toastMessage");
@@ -519,6 +529,7 @@ A|Cordless car care vacuum|980|4.7|88|Workshop pick|Cleanline Auto|1493238792000
       <article class="product-card" data-product-id="${escapeHTML(product.id)}">
         <div class="product-image-wrap">
           <span class="product-badge ${badgeClass}">${escapeHTML(product.badge)}</span>
+          ${product.exclusiveBadge ? `<span class="product-rarity-badge"><i class="fa-solid fa-certificate" aria-hidden="true"></i>${escapeHTML(product.exclusiveBadge)}</span>` : ""}
           ${product.images.length > 1 ? `<span class="product-photo-count"><i class="fa-regular fa-images" aria-hidden="true"></i> ${product.images.length} photos</span>` : ""}
           <button class="favorite-button${isFavorite ? " is-favorite" : ""}" type="button" data-favorite aria-label="${isFavorite ? "Remove" : "Add"} ${escapeHTML(product.name)} ${isFavorite ? "from" : "to"} favorites" aria-pressed="${isFavorite}">
             <i class="${isFavorite ? "fa-solid" : "fa-regular"} fa-heart" aria-hidden="true"></i>
@@ -535,7 +546,7 @@ A|Cordless car care vacuum|980|4.7|88|Workshop pick|Cleanline Auto|1493238792000
           <div class="product-bottom">
             <strong class="product-price">${formatPrice(product.price)}</strong>
             <div class="product-actions">
-              <button class="view-details" type="button" data-product-details="${escapeHTML(product.id)}">View details</button>
+              <button class="view-details quick-view-trigger" type="button" data-product-details="${escapeHTML(product.id)}" aria-label="Quick view: ${escapeHTML(product.name)}"><i class="fa-regular fa-eye" aria-hidden="true"></i><span>Quick View</span></button>
               <button class="add-cart" type="button" data-add-cart="${escapeHTML(product.id)}" aria-label="Add ${escapeHTML(product.name)} to cart">
                 <span class="add-cart-icon" aria-hidden="true"><i class="fa-solid fa-plus"></i></span>
                 <span class="add-cart-label">Add</span>
@@ -548,19 +559,20 @@ A|Cordless car care vacuum|980|4.7|88|Workshop pick|Cleanline Auto|1493238792000
   };
 
   const getVisibleProducts = () => {
-    const term = normalize(searchInput?.value || "");
+    const rawTerm = normalize(activeSearchTerm);
+    const term = trendingSearchAliases.get(rawTerm) || rawTerm;
     let matches = catalogRows.filter((product) => {
       const matchesCategory = activeCategory === "all" || product.category === activeCategory;
       const searchable = normalize(`${product.name} ${product.category} ${product.seller} ${product.badge}`);
       return matchesCategory && (!term || searchable.includes(term));
     });
     if (activeCategory === "all" && !showingAll && !term) matches = matches.filter((product) => product.featured);
-    return { matches, term };
+    return { matches, term, searchTerm: activeSearchTerm };
   };
 
   const updateCatalog = () => {
     if (!productGrid) return;
-    const { matches, term } = getVisibleProducts();
+    const { matches, term, searchTerm } = getVisibleProducts();
     productGrid.innerHTML = matches.map(renderProduct).join("");
     if (emptyState) emptyState.hidden = matches.length !== 0;
     if (catalogNote) {
@@ -577,7 +589,7 @@ A|Cordless car care vacuum|980|4.7|88|Workshop pick|Cleanline Auto|1493238792000
         : `Show all ${catalogRows.length} products <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>`;
     }
     const label = activeCategory === "all" ? "Marketplace products" : `${activeCategory} products`;
-    productGrid.setAttribute("aria-label", term ? `${label}, search results for ${searchInput.value}` : label);
+    productGrid.setAttribute("aria-label", term ? `${label}, search results for ${searchTerm}` : label);
   };
 
   const setActiveCategory = (category) => {
@@ -629,8 +641,25 @@ A|Cordless car care vacuum|980|4.7|88|Workshop pick|Cleanline Auto|1493238792000
     showToast(`${product.name} added to your cart. Cart count: ${cartItems}.`);
   };
 
-  searchInput?.addEventListener("input", updateCatalog);
-  searchForm?.addEventListener("submit", (event) => {
+  searchInput?.addEventListener("input", () => {
+    activeSearchTerm = searchInput.value;
+    updateCatalog();
+  });
+  heroSearchInput?.addEventListener("input", () => {
+    document.querySelectorAll(".trending-tag").forEach((tag) => {
+      const isActive = normalize(tag.dataset.searchTag || "") === normalize(heroSearchInput.value);
+      tag.setAttribute("aria-pressed", String(isActive));
+    });
+  });
+  document.querySelector(".trending-tags")?.addEventListener("click", (event) => {
+    const target = event.target instanceof Element ? event.target.closest("[data-search-tag]") : null;
+    if (!target || !heroSearchInput) return;
+    heroSearchInput.value = target.dataset.searchTag || "";
+    heroSearchInput.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+
+  const scrollToCatalog = () => document.querySelector("#explore")?.scrollIntoView({ behavior: "smooth" });
+  const submitManualSearch = (event) => {
     event.preventDefault();
     if (!productGrid) {
       const marketplaceURL = new URL("index.html", window.location.href);
@@ -640,12 +669,32 @@ A|Cordless car care vacuum|980|4.7|88|Workshop pick|Cleanline Auto|1493238792000
       window.location.assign(marketplaceURL.href);
       return;
     }
+    activeSearchTerm = searchInput?.value || "";
     updateCatalog();
-    document.querySelector("#explore")?.scrollIntoView({ behavior: "smooth" });
-  });
+    scrollToCatalog();
+  };
+  const submitHeroSearch = (event) => {
+    event.preventDefault();
+    if (!productGrid) {
+      const marketplaceURL = new URL("index.html", window.location.href);
+      const searchTerm = heroSearchInput?.value.trim();
+      if (searchTerm) marketplaceURL.searchParams.set("search", searchTerm);
+      marketplaceURL.hash = "explore";
+      window.location.assign(marketplaceURL.href);
+      return;
+    }
+    activeSearchTerm = heroSearchInput?.value || "";
+    updateCatalog();
+    scrollToCatalog();
+  };
+  searchForm?.addEventListener("submit", submitManualSearch);
+  heroSearchForm?.addEventListener("submit", submitHeroSearch);
   filterTabs.forEach((tab) => {
     tab.addEventListener("click", () => {
       if (searchInput) searchInput.value = "";
+      if (heroSearchInput) heroSearchInput.value = "";
+      activeSearchTerm = "";
+      document.querySelectorAll(".trending-tag").forEach((tag) => tag.setAttribute("aria-pressed", "false"));
       setActiveCategory(tab.dataset.filter || "all");
     });
   });
@@ -655,6 +704,9 @@ A|Cordless car care vacuum|980|4.7|88|Workshop pick|Cleanline Auto|1493238792000
       if (!category) return;
       event.preventDefault();
       if (searchInput) searchInput.value = "";
+      if (heroSearchInput) heroSearchInput.value = "";
+      activeSearchTerm = "";
+      document.querySelectorAll(".trending-tag").forEach((tag) => tag.setAttribute("aria-pressed", "false"));
       setActiveCategory(category);
       document.querySelector("#explore")?.scrollIntoView({ behavior: "smooth" });
     });
@@ -702,6 +754,9 @@ A|Cordless car care vacuum|980|4.7|88|Workshop pick|Cleanline Auto|1493238792000
     document.querySelector("#productModalCategory").textContent = product.category;
     document.querySelector("#productModalDescription").textContent = product.description;
     document.querySelector("#productModalPrice").textContent = formatPrice(product.price);
+    document.querySelector("#productModalSeller").textContent = product.seller;
+    document.querySelector("#productModalRating").textContent = `${product.rating.toFixed(1)} / 5 · ${product.reviews} reviews`;
+    document.querySelector("#productModalBadge").textContent = product.exclusiveBadge || product.badge;
     const modalAddButton = document.querySelector("#modalAddCart");
     modalAddButton.dataset.productId = product.id;
     if (modal) modal.show();
