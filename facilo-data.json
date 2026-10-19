@@ -1,0 +1,303 @@
+{
+  "brand": {
+    "name": "Facilo",
+    "tagline": "chercher-la, trouve-la et prendre-le",
+    "logo": {
+      "file": "facilo-logo.png",
+      "note": "Original artwork, unchanged. Only its colour is set through the --logo CSS variable."
+    },
+    "colors": {
+      "dark": {
+        "background": "#1E120B",
+        "chocolate": "#3E2723",
+        "caramel": "#8D5B4C",
+        "text": "#FAF6F0",
+        "accent": "#D4AF37",
+        "logo": "#FAF6F0"
+      },
+      "light": {
+        "background": "#FAF6F0",
+        "chocolate": "#F3EFEA",
+        "caramel": "#8D5B4C",
+        "text": "#1E120B",
+        "accent": "#916B16",
+        "logo": "#1E120B"
+      }
+    }
+  },
+  "pages": {
+    "home": {
+      "file": "facilo-home.html",
+      "nav": "Home",
+      "icon": "home",
+      "eyebrow": "The Facilo platform",
+      "title": "What you’re looking for is already close.",
+      "subtitle": "Search it, find it, then take it: Facilo connects every search to the place where the item is waiting for you.",
+      "buttons": [
+        {
+          "label": "Sign up",
+          "to": "signup",
+          "icon": "user",
+          "style": "gold"
+        },
+        {
+          "label": "Log in",
+          "to": "login",
+          "icon": "in",
+          "style": "ghost"
+        },
+        {
+          "label": "Admin access",
+          "to": "dashboard",
+          "icon": "shield",
+          "style": "ghost"
+        }
+      ],
+      "visitor": {
+        "label": "Enter as visitor",
+        "icon": "eye",
+        "message": "Welcome, visitor. You can only browse the home page.",
+        "banner": "Visitor mode: browsing limited to the home page.",
+        "exit": "Exit",
+        "exitMessage": "Visitor mode exited.",
+        "locked": "Visitor mode: create an account or exit this mode to continue.",
+        "note": "Buttons are locked in visitor mode."
+      },
+      "panel": {
+        "top": [
+          "FACILO",
+          "AVAILABLE"
+        ],
+        "bottom": "Search · Find · Take",
+        "badges": [
+          "Found near you",
+          "Ready to take"
+        ]
+      },
+      "featuresEyebrow": "Features",
+      "featuresTitle": "Three steps, nothing more.",
+      "features": [
+        {
+          "title": "Search",
+          "text": "One search bar, clear results from the first letters.",
+          "icon": "search"
+        },
+        {
+          "title": "Find",
+          "text": "Every result shows where it is and whether it’s available.",
+          "icon": "pin"
+        },
+        {
+          "title": "Take",
+          "text": "Reserve in one tap and pick it up whenever suits you.",
+          "icon": "bag"
+        }
+      ],
+      "footer": "© 2026 Facilo — chercher-la, trouve-la et prendre-le"
+    },
+    "signup": {
+      "file": "facilo-signup.html",
+      "nav": "Sign up",
+      "icon": "user",
+      "eyebrow": "Sign up",
+      "title": "Create an account",
+      "subtitle": "It only takes a few seconds.",
+      "submit": "Create my account",
+      "switch": {
+        "text": "Already registered?",
+        "label": "Log in",
+        "to": "login"
+      },
+      "fields": [
+        {
+          "name": "fullname",
+          "label": "Full name",
+          "type": "text",
+          "icon": "user",
+          "placeholder": "e.g. Salma Benali",
+          "autocomplete": "name",
+          "required": true,
+          "minLength": 2,
+          "error": "Enter your full name."
+        },
+        {
+          "name": "email",
+          "label": "Email",
+          "type": "email",
+          "icon": "mail",
+          "placeholder": "you@example.com",
+          "autocomplete": "email",
+          "required": true,
+          "error": "Enter a valid email address."
+        },
+        {
+          "name": "password",
+          "label": "Password",
+          "type": "password",
+          "icon": "lock",
+          "placeholder": "8 characters minimum",
+          "autocomplete": "new-password",
+          "required": true,
+          "minLength": 8,
+          "error": "Password must be at least 8 characters."
+        },
+        {
+          "name": "confirm",
+          "label": "Confirm password",
+          "type": "password",
+          "icon": "lock",
+          "autocomplete": "new-password",
+          "required": true,
+          "matches": "password",
+          "error": "The two passwords don’t match."
+        }
+      ],
+      "checks": [
+        {
+          "name": "terms",
+          "text": "I accept Facilo’s terms of use.",
+          "required": true,
+          "error": "Accept the terms of use to continue."
+        }
+      ],
+      "successMessage": "Account created. Log in now.",
+      "redirect": "login"
+    },
+    "login": {
+      "file": "facilo-login.html",
+      "nav": "Log in",
+      "icon": "in",
+      "eyebrow": "Log in",
+      "title": "Welcome back",
+      "subtitle": "Pick up your searches where you left off.",
+      "submit": "Log in",
+      "switch": {
+        "text": "No account yet?",
+        "label": "Sign up",
+        "to": "signup"
+      },
+      "fields": [
+        {
+          "name": "email",
+          "label": "Email address",
+          "type": "email",
+          "icon": "mail",
+          "placeholder": "you@example.com",
+          "autocomplete": "email",
+          "required": true,
+          "error": "Enter a valid email address."
+        },
+        {
+          "name": "password",
+          "label": "Password",
+          "type": "password",
+          "icon": "lock",
+          "autocomplete": "current-password",
+          "required": true,
+          "error": "Enter your password."
+        }
+      ],
+      "remember": "Remember me",
+      "forgot": "Forgot password?",
+      "forgotMessage": "A reset link will be sent to your email.",
+      "social": [
+        "Google",
+        "Facebook"
+      ],
+      "socialMessage": "login: coming soon.",
+      "successMessage": "Logged in. Welcome to Facilo."
+    },
+    "dashboard": {
+      "file": "facilo-dashboard.html",
+      "nav": "Admin",
+      "icon": "shield",
+      "eyebrow": "Administration",
+      "title": "Admin access",
+      "subtitle": "Enter your access code to open the dashboard.",
+      "submit": "Open admin area",
+      "dashTitle": "Dashboard",
+      "logout": "Close session"
+    }
+  },
+  "admin": {
+    "codes": [
+      "FACILO-2026",
+      "CAFE-7421",
+      "MOKA-9090"
+    ],
+    "placeholder": "XXXXX-0000",
+    "examplesLabel": "Example codes (tap to fill):",
+    "wrongCode": "Incorrect code. Check it and try again.",
+    "granted": "Admin access granted.",
+    "closed": "Admin session closed."
+  },
+  "dashboard": {
+    "stats": [
+      {
+        "label": "Active users",
+        "value": "1 284",
+        "icon": "user"
+      },
+      {
+        "label": "Facilo searches",
+        "value": "9 612",
+        "icon": "search"
+      },
+      {
+        "label": "Alerts",
+        "value": "auto",
+        "icon": "bell"
+      }
+    ],
+    "usersTitle": "Recent users",
+    "statusLabels": {
+      "ok": "Active",
+      "wait": "Pending",
+      "ban": "Blocked"
+    },
+    "users": [
+      {
+        "name": "Salma Benali",
+        "email": "salma@mail.com",
+        "status": "ok"
+      },
+      {
+        "name": "Youssef Idrissi",
+        "email": "youssef@mail.com",
+        "status": "ok"
+      },
+      {
+        "name": "Imane Tazi",
+        "email": "imane@mail.com",
+        "status": "wait"
+      },
+      {
+        "name": "Karim Alaoui",
+        "email": "karim@mail.com",
+        "status": "ban"
+      },
+      {
+        "name": "Nora Chraibi",
+        "email": "nora@mail.com",
+        "status": "wait"
+      }
+    ],
+    "securityTitle": "Security",
+    "security": [
+      {
+        "label": "Admin two-step verification",
+        "on": true
+      },
+      {
+        "label": "Lock after 3 wrong codes",
+        "on": true
+      },
+      {
+        "label": "Login log",
+        "on": false
+      }
+    ],
+    "lockButton": "Lock sign-ups",
+    "lockMessage": "Sign-ups locked for this session."
+  }
+}
