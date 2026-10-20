@@ -3,7 +3,7 @@
     "name": "Facilo",
     "tagline": "chercher-la, trouve-la et prendre-le",
     "logo": {
-      "file": "facilo-logo.png",
+      "file": "assets/facilo.png",
       "note": "Original artwork, unchanged. Only its colour is set through the --logo CSS variable."
     },
     "colors": {
@@ -27,7 +27,7 @@
   },
   "pages": {
     "home": {
-      "file": "facilo-home.html",
+      "file": "home.html",
       "nav": "Home",
       "icon": "home",
       "eyebrow": "The Facilo platform",
@@ -96,7 +96,7 @@
       "footer": "© 2026 Facilo — chercher-la, trouve-la et prendre-le"
     },
     "signup": {
-      "file": "facilo-signup.html",
+      "file": "signup.html",
       "nav": "Sign up",
       "icon": "user",
       "eyebrow": "Sign up",
@@ -160,11 +160,11 @@
           "error": "Accept the terms of use to continue."
         }
       ],
-      "successMessage": "Account created. Log in now.",
-      "redirect": "login"
+      "successMessage": "Account created. Welcome to Facilo.",
+      "redirect": "index.html"
     },
     "login": {
-      "file": "facilo-login.html",
+      "file": "login.html",
       "nav": "Log in",
       "icon": "in",
       "eyebrow": "Log in",
@@ -205,10 +205,11 @@
         "Facebook"
       ],
       "socialMessage": "login: coming soon.",
-      "successMessage": "Logged in. Welcome to Facilo."
+      "successMessage": "Logged in. Welcome to Facilo.",
+      "redirect": "index.html"
     },
     "dashboard": {
-      "file": "facilo-dashboard.html",
+      "file": "dashboard.html",
       "nav": "Admin",
       "icon": "shield",
       "eyebrow": "Administration",
