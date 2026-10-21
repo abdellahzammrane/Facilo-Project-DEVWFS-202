@@ -1,0 +1,63 @@
+/* Shared theme reveal and smooth palette changes for the standalone account pages. */
+.svg-logo,
+.sp-logo-image {
+  transition: filter 1.2s cubic-bezier(.4, 0, .2, 1);
+}
+
+html[data-theme="light"] .svg-logo,
+html[data-theme="light"] .sp-logo-image {
+  filter: brightness(0);
+}
+
+.theme-transition-overlay {
+  position: fixed;
+  z-index: 2000;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.theme-transition-overlay::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  transform: scale(.001);
+  transform-origin: var(--theme-origin-x, 50%) var(--theme-origin-y, 50%);
+  background: radial-gradient(circle at var(--theme-origin-x, 50%) var(--theme-origin-y, 50%), var(--wave-core) 0%, var(--wave-core) 34%, var(--wave-edge) 58%, transparent 74%);
+  opacity: .96;
+  animation: faciloThemeBleed 1.35s cubic-bezier(.4, 0, .2, 1) forwards;
+}
+
+.theme-transition-overlay--light {
+  --wave-core: rgba(255, 226, 133, .4);
+  --wave-edge: rgba(250, 246, 240, .23);
+}
+
+.theme-transition-overlay--dark {
+  --wave-core: rgba(30, 18, 11, .48);
+  --wave-edge: rgba(141, 91, 76, .25);
+}
+
+@keyframes faciloThemeBleed {
+  0% { transform: scale(.001); opacity: .96; }
+  62% { opacity: .78; }
+  100% { transform: scale(1.08); opacity: 0; }
+}
+
+html.theme-transitioning,
+html.theme-transitioning body,
+html.theme-transitioning body *,
+html.theme-transitioning body::before,
+html.theme-transitioning body::after,
+html.theme-transitioning body *::before,
+html.theme-transitioning body *::after {
+  transition-property: color, background-color, border-color, box-shadow, fill, stroke, opacity, transform, filter, backdrop-filter;
+  transition-duration: 1.2s !important;
+  transition-timing-function: cubic-bezier(.4, 0, .2, 1) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-transition-overlay { display: none; }
+  .svg-logo,
+  .sp-logo-image { transition: none; }
+}

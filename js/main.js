@@ -180,22 +180,28 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     const drawParticles = (time = performance.now()) => {
+      const lightMode = document.documentElement.dataset.theme === "light";
+      const glowScale = lightMode ? 5.2 : 3.1;
+      const coreScale = lightMode ? 1.2 : 1;
+      const glowColor = lightMode ? "rgba(177, 126, 23, .28)" : "rgba(212, 175, 55, .19)";
+      const fireflyColor = lightMode ? "rgba(167, 113, 14, .82)" : "rgba(212, 175, 55, .72)";
+      const sparkColor = lightMode ? "rgba(255, 218, 112, .98)" : "rgba(255, 240, 192, .82)";
       context.clearRect(0, 0, viewportWidth, viewportHeight);
       context.globalCompositeOperation = "lighter";
       particles.forEach((particle) => {
         const pulse = .72 + Math.sin(time * .001 * particle.shimmer + particle.phase) * .18;
         context.globalAlpha = particle.opacity * pulse;
-        context.fillStyle = "rgba(212, 175, 55, .19)";
+        context.fillStyle = glowColor;
         context.beginPath();
-        context.arc(particle.x, particle.y, particle.radius * 3.1, 0, Math.PI * 2);
+        context.arc(particle.x, particle.y, particle.radius * glowScale, 0, Math.PI * 2);
         context.fill();
-        context.fillStyle = "rgba(212, 175, 55, .72)";
+        context.fillStyle = fireflyColor;
         context.beginPath();
-        context.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+        context.arc(particle.x, particle.y, particle.radius * coreScale, 0, Math.PI * 2);
         context.fill();
-        context.fillStyle = "rgba(255, 240, 192, .82)";
+        context.fillStyle = sparkColor;
         context.beginPath();
-        context.arc(particle.x, particle.y, particle.radius * .34, 0, Math.PI * 2);
+        context.arc(particle.x, particle.y, particle.radius * (lightMode ? .42 : .34), 0, Math.PI * 2);
         context.fill();
       });
       context.globalAlpha = 1;

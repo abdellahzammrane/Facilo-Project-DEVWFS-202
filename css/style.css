@@ -80,7 +80,7 @@ img { max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 button, input { font: inherit; }
 ::selection { color: var(--espresso); background: var(--bronze); }
-#goldCanvas { position: fixed; z-index: -2; inset: 0; display: block; width: 100%; height: 100%; opacity: .7; pointer-events: none; }
+#goldCanvas { position: fixed; z-index: -2; inset: 0; display: block; width: 100%; height: 100%; opacity: .7; pointer-events: none; transition: opacity 1.2s cubic-bezier(.4, 0, .2, 1); }
 
 @keyframes ambientDrift {
   0% { transform: translate3d(-1.5%, -1%, 0) scale(1); }
@@ -636,7 +636,7 @@ html[data-theme="light"] body::before {
     linear-gradient(145deg, #FAF6F0 0%, #F3EFEA 53%, #FAF6F0 100%);
 }
 html[data-theme="light"] body::after { opacity: .055; }
-html[data-theme="light"] #goldCanvas { opacity: .22; }
+html[data-theme="light"] #goldCanvas { opacity: .48; mix-blend-mode: multiply; }
 html[data-theme="light"] .navbar {
   background: rgba(250, 246, 240, .86);
   box-shadow: 0 10px 30px rgba(30, 18, 11, .12), 0 0 20px rgba(145, 107, 22, .11);
