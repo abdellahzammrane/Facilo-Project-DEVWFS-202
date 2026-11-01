@@ -3,8 +3,4 @@
     "cloudinary/cloudinary_php": "^3.0",
     "firebase/php-jwt": "^6.10"
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 8f8bee6 (Fixing the error of rejecting)
